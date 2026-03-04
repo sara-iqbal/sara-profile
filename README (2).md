@@ -62,15 +62,15 @@ Full project list available in the repositories below.
 
 ## Industry Certifications
 
-- J.P. Morgan Chase — Quantitative Research Simulation
-- Citi — Markets Quantitative Analysis
-- Goldman Sachs — Risk Simulation
-- Microsoft Azure — DP-100 Data Scientist Associate (Prep)
-- Amazon Web Services — Cloud Technical Essentials
-- Google Cloud — Big Data and ML Fundamentals
-- IBM — Python for Data Science
-- Coursera — Machine Learning Specialisation
-- Microsoft — Excel Data Analysis
+- J.P. Morgan Chase Quantitative Research Simulation
+- Citi Markets Quantitative Analysis
+- Goldman Sachs Risk Simulation
+- Microsoft Azure DP-100 Data Scientist Associate (Prep)
+- Amazon Web Services Cloud Technical Essentials
+- Google Cloud Big Data and ML Fundamentals
+- IBM Python for Data Science
+- Coursera Machine Learning Specialisation
+- Microsoft Excel Data Analysis
 
 ---
 
@@ -95,6 +95,8 @@ I am actively seeking full-time roles in:
 - Machine Learning Engineering
 - Quantitative Analysis
 - Financial Data Science
+- Data Anlyst
+- Risk Analyst
 
 If you are working on something at the intersection of data, finance, or AI and are looking for someone who can take a project from research to deployment, feel free to reach out.
 
