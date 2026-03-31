@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sara Iqbal — Data Scientist & Quantitative Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,400;1,700&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --white: #ffffff;
+    --ink: #0f0f0f;
+    --ink2: #2a2a2a;
+    --muted: #6b7280;
+    --light: #e8e4dc;
+    --border: #d6d0c4;
+    --accent: #1a3a5c;
+    --accent2: #c8522a;
+    --accent3: #2d6a4f;
+    --tag-bg: #eef2f7;
+    --finance-bg: #fff8ed;
+    --finance-c: #92400e;
+    --ml-bg: #f0fdf4;
+    --ml-c: #166534;
+    --nlp-bg: #eff6ff;
+    --nlp-c: #1e40af;
+    --data-bg: #fdf4ff;
+    --data-c: #6b21a8;
+    --health-bg: #fff1f2;
+    --health-c: #9f1239;
+    --research-bg: #f8fafc;
+    --research-c: #334155;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Epilogue', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 4rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-name span { color: var(--accent2); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: white !important;
+    padding: 0.4rem 1.1rem;
+    border-radius: 2px;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    margin-top: 60px;
+    overflow: hidden;
+    background: var(--accent);
+    padding: 0.5rem 0;
+  }
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 40s linear infinite;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 2rem;
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+  .ticker-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent2);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 4rem 4rem;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: calc(100vh - 90px);
+  }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+  }
+  .hero-label::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--accent2);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    margin-bottom: 0.2rem;
+  }
+  .hero h1 .italic-line {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin-top: 1.5rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+
+  /* ── PROJECTS GRID ── */
+  .section { padding: 5rem 4rem; max-width: 1300px; margin: 0 auto; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 800; }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+  .filter-btn {
+    padding: 0.35rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: transparent;
+    color: var(--muted);
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+  }
+  .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .project-card.hidden { display: none; }
+
+  .card-top { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+  .card-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--light); }
+  .card-cat { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; }
+
+  .cat-finance { background: var(--finance-bg); color: var(--finance-c); }
+  .cat-ml      { background: var(--ml-bg);      color: var(--ml-c);      }
+  .cat-nlp     { background: var(--nlp-bg);     color: var(--nlp-c);     }
+  .cat-health  { background: var(--health-bg);  color: var(--health-c);  }
+
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .card-desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; flex-grow: 1; }
+  .card-result { background: #f8f9ff; padding: 0.7rem; border-radius: 2px; margin-bottom: 1rem; font-size: 0.72rem; color: #1e40af; font-weight: 500; }
+  
+  .card-tools { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .tool-tag { font-size: 0.6rem; background: var(--bg); border: 1px solid var(--border); padding: 0.1rem 0.4rem; }
+
+  @media (max-width: 1024px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#">Sara <span>Iqbal</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Portfolio</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>17 Projects Built</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>8.4 bps Tracking Error</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>XGBoost & ViT Expert</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Quant Finance Specialist</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>London, UK</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>17 Projects Built</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>8.4 bps Tracking Error</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>XGBoost & ViT Expert</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Quant Finance Specialist</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-label">Data Scientist & Quantitative Dev</div>
+    <h1>Sara<br><span class="italic-line">Iqbal.</span></h1>
+    <p class="hero-subtitle">
+      A multidisciplinary portfolio spanning high-frequency finance, clinical NLP, and computer vision. 
+      Focused on building scalable, high-accuracy systems for complex domains.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">17</span><span class="stat-label">Total Projects</span></div>
+      <div class="stat"><span class="stat-num">1.24</span><span class="stat-label">Best Sharpe</span></div>
+      <div class="stat"><span class="stat-num">97.4%</span><span class="stat-label">Fraud AUC</span></div>
+    </div>
+    <div style="margin-top:2rem; display:flex; gap:1rem;">
+      <a href="#projects" class="btn btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn btn-outline">Let's Talk</a>
+    </div>
+  </div>
+</div>
+
+<div id="projects" class="section">
+  <div class="section-header reveal">
+    <h2 class="section-title">Case Studies</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" onclick="filterProjects('all', this)">All (17)</button>
+    <button class="filter-btn" onclick="filterProjects('finance', this)">Finance</button>
+    <button class="filter-btn" onclick="filterProjects('ml', this)">ML & AI</button>
+    <button class="filter-btn" onclick="filterProjects('nlp', this)">NLP</button>
+    <button class="filter-btn" onclick="filterProjects('health', this)">Healthcare</button>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card reveal" data-cat="finance">
+      <div class="card-top"><span class="card-num">01</span><span class="card-cat cat-finance">Finance</span></div>
+      <div class="card-title">Bond Index Replication Engine</div>
+      <div class="card-desc">Rebalanced 150-bond portfolios using SciPy SLSQP optimization to match index characteristics with minimal slippage.</div>
+      <div class="card-result">🎯 Tracking Error: 8.4 bps | Sharpe: 1.24</div>
+      <div class="card-tools"><span class="tool-tag">SciPy</span><span class="tool-tag">Optimization</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="finance">
+      <div class="card-top"><span class="card-num">02</span><span class="card-cat cat-finance">Finance</span></div>
+      <div class="card-title">Revenue Accrual & Fee Engine</div>
+      <div class="card-desc">Automated 1,080+ monthly fee calculations, replacing legacy manual spreadsheets for a $500M fund.</div>
+      <div class="card-result">✅ 99.7% Accuracy vs Historical Manual Audits</div>
+      <div class="card-tools"><span class="tool-tag">Python</span><span class="tool-tag">Data Audit</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="finance ml">
+      <div class="card-top"><span class="card-num">03</span><span class="card-cat cat-ml">ML</span></div>
+      <div class="card-title">Equity Long/Short Signal Engine</div>
+      <div class="card-desc">XGBoost-based signal generator utilizing walk-forward validation to predict alpha in volatile markets.</div>
+      <div class="card-result">📈 Sharpe 1.17 vs SPY 0.81</div>
+      <div class="card-tools"><span class="tool-tag">XGBoost</span><span class="tool-tag">Walk-Forward</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">04</span><span class="card-cat cat-ml">AI</span></div>
+      <div class="card-title">Real-Time Fraud Detection</div>
+      <div class="card-desc">High-throughput model processing 284k transactions with SHAP-based local interpretability for fraud analysts.</div>
+      <div class="card-result">🛡️ ROC-AUC 97.4%</div>
+      <div class="card-tools"><span class="tool-tag">SHAP</span><span class="tool-tag">Imbalanced Data</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="nlp finance">
+      <div class="card-top"><span class="card-num">05</span><span class="card-cat cat-nlp">NLP</span></div>
+      <div class="card-title">FinBERT News Sentiment Analyser</div>
+      <div class="card-desc">Fine-tuned FinBERT on financial news to generate trading sentiment scores for equity desks.</div>
+      <div class="card-result">📊 Accuracy: 87.3% | F1: 0.86</div>
+      <div class="card-tools"><span class="tool-tag">HuggingFace</span><span class="tool-tag">FinBERT</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="health ml">
+      <div class="card-top"><span class="card-num">06</span><span class="card-cat cat-health">Health</span></div>
+      <div class="card-title">Medical Image Classification (Skin)</div>
+      <div class="card-desc">Comparative study of MobileNetV2 vs. ViT-Tiny on the HAM10000 dataset for 7-class lesion detection.</div>
+      <div class="card-result">🩺 83.2% Accuracy via Transfer Learning</div>
+      <div class="card-tools"><span class="tool-tag">PyTorch</span><span class="tool-tag">ViT</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">07</span><span class="card-cat cat-ml">ML</span></div>
+      <div class="card-title">Multi-Horizon Demand Forecaster</div>
+      <div class="card-desc">ARIMA vs Prophet vs LSTM comparison for retail and energy time-series forecasting.</div>
+      <div class="card-result">📅 Prophet MAPE: 7.8% (30-day horizon)</div>
+      <div class="card-tools"><span class="tool-tag">LSTM</span><span class="tool-tag">Prophet</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="nlp health">
+      <div class="card-top"><span class="card-num">08</span><span class="card-cat cat-health">Health/NLP</span></div>
+      <div class="card-title">Clinical Patient Outcome Prediction</div>
+      <div class="card-desc">Fine-tuned DistilBERT on clinical notes to predict 3-class patient outcomes with high sensitivity.</div>
+      <div class="card-result">📋 88.4% Accuracy | 0.87 F1</div>
+      <div class="card-tools"><span class="tool-tag">DistilBERT</span><span class="tool-tag">Clinical AI</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">09</span><span class="card-cat cat-ml">ML</span></div>
+      <div class="card-title">Fashion Recommendation Hybrid</div>
+      <div class="card-desc">A three-stage hybrid system: Content-based, SVD Collaborative Filtering, and a weighted ensemble.</div>
+      <div class="card-result">🛍️ Precision@10: 38.2%</div>
+      <div class="card-tools"><span class="tool-tag">Scikit-Surprise</span><span class="tool-tag">Hybrid AI</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">10</span><span class="card-cat cat-ml">AI</span></div>
+      <div class="card-title">LLM Data Ablation Study</div>
+      <div class="card-desc">Research on how data quality vs. quantity affects scaling curves during DistilBERT fine-tuning.</div>
+      <div class="card-result">🔬 Defined 3 critical scaling thresholds</div>
+      <div class="card-tools"><span class="tool-tag">Research</span><span class="tool-tag">Ablation</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="finance">
+      <div class="card-top"><span class="card-num">11</span><span class="card-cat cat-finance">Finance</span></div>
+      <div class="card-title">Monte Carlo Option Pricing</div>
+      <div class="card-desc">Implemented Black-Scholes and Monte Carlo engines for path-dependent options and Greek calculations.</div>
+      <div class="card-result">📉 Model Risk Validation & Reserve Analysis</div>
+      <div class="card-tools"><span class="tool-tag">NumPy</span><span class="tool-tag">Stochastic Calc</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">12</span><span class="card-cat cat-ml">ML</span></div>
+      <div class="card-title">Heart Disease Risk Analysis</div>
+      <div class="card-desc">XGBoost model on UCI data with SHAP explainability for clinician-ready risk scoring.</div>
+      <div class="card-result">❤️ AUC 0.924 | Explainable Scoring</div>
+      <div class="card-tools"><span class="tool-tag">SHAP</span><span class="tool-tag">XGBoost</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="nlp">
+      <div class="card-top"><span class="card-num">13</span><span class="card-cat cat-nlp">NLP</span></div>
+      <div class="card-title">Text Dataset Quality Pipeline</div>
+      <div class="card-desc">5-stage filtering pipeline for Wikipedia-scale datasets: deduping, toxicity, and quality scoring.</div>
+      <div class="card-result">🧹 Cleansed 100k+ records per minute</div>
+      <div class="card-tools"><span class="tool-tag">RegEx</span><span class="tool-tag">FastText</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">14</span><span class="card-cat cat-ml">ML</span></div>
+      <div class="card-title">Multimodal Dataset Audit Tool</div>
+      <div class="card-desc">Alignment scoring for text-image pairs using MS-COCO to detect semantic drift.</div>
+      <div class="card-result">🖼️ CLIP-based Alignment Scoring</div>
+      <div class="card-tools"><span class="tool-tag">CLIP</span><span class="tool-tag">PyTorch</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="finance">
+      <div class="card-top"><span class="card-num">15</span><span class="card-cat cat-finance">Finance</span></div>
+      <div class="card-title">Alternatives Fund Lifecycle Tracker</div>
+      <div class="card-desc">End-to-end data architecture for tracking investor capital calls across 8 global jurisdictions.</div>
+      <div class="card-result">💰 Managing $500M AUM workflows</div>
+      <div class="card-tools"><span class="tool-tag">SQL</span><span class="tool-tag">ETL</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="ml">
+      <div class="card-top"><span class="card-num">16</span><span class="card-cat cat-ml">ML</span></div>
+      <div class="card-title">Helpdesk Support Analytics</div>
+      <div class="card-desc">KPI/OKR tracking for 500+ tech tickets, identifying knowledge base gaps through clustering.</div>
+      <div class="card-result">📈 22% Reduction in Ticket Vol (predicted)</div>
+      <div class="card-tools"><span class="tool-tag">K-Means</span><span class="tool-tag">Analytics</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="finance">
+      <div class="card-top"><span class="card-num">17</span><span class="card-cat cat-finance">Finance</span></div>
+      <div class="card-title">JPMC Hackathon: Data for Good</div>
+      <div class="card-desc">Collaborated on non-profit data solutions at the J.P. Morgan London 2025 event.</div>
+      <div class="card-result">🏆 Finalist Team Presentation</div>
+      <div class="card-tools"><span class="tool-tag">Social Impact</span><span class="tool-tag">Python</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div id="contact" style="background:var(--accent); color:white; padding:5rem 4rem; text-align:center;">
+  <h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:1rem;">Ready for the next sprint?</h2>
+  <p style="opacity:0.8; margin-bottom:2rem;">Let's discuss how my cross-domain ML expertise can help your team.</p>
+  <a href="mailto:sara@example.com" class="btn" style="background:white; color:var(--accent);">Email Me</a>
+</div>
+
+<script>
+  function filterProjects(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (cat === 'all') {
+        card.classList.remove('hidden');
+      } else {
+        const cardCat = card.dataset.cat || '';
+        cardCat.includes(cat) ? card.classList.remove('hidden') : card.classList.add('hidden');
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
